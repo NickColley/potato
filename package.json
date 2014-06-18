@@ -1,0 +1,15 @@
+{
+  "name": "potato",
+  "version": "0.0.0",
+  "description": "",
+  "main": "potato.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^1.20.1",
+    "cheerio": "^0.17.0"
+  }
+}
