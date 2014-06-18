@@ -48,7 +48,7 @@ describe('Potato', function(){
       var result = P.render('<heading>Hello!</heading>');
       assert.deepEqual(result, expected);
     });
-    it('should multiple render components', function(){
+    it('should render multiple components', function(){
       var input = '';
       input += '<heading>';
       input += '  Hello!';
@@ -70,6 +70,47 @@ describe('Potato', function(){
       
       var result = P.render(input);
       assert.deepEqual(result, expected);
+    });
+    it('should render nested components', function(){
+      var input = '';
+      input += '<panel>';
+      input += '  <title>';
+      input += '    Hello!';
+      input += '  </title>';
+      input += '</panel>';
+      
+      P.add('panel', '<center><shadow></shadow></center>');
+      P.add('title', '<h1><shadow></shadow></h1>');     
+      
+      var expected = '';
+      expected += '<center>';
+      expected += '  <h1>';
+      expected += '    Hello!';
+      expected += '  </h1>';
+      expected += '</center>';   
+      
+      var result = P.render(input);
+      assert.deepEqual(result, expected);
+    });
+    it('should render components inside components', function(){
+      var input = '<datetime>12:30</datetime>';
+      
+      P.add('datetime', '<center><title>The time is:</title><shadow></shadow></center>');
+      P.add('title', '<h1><shadow></shadow></h1>');     
+      
+      var expected = '<center><h1>The time is:</h1>12:30</center>';
+      
+      var result = P.render(input);
+      assert.deepEqual(result, expected);
+    });
+  });
+  
+  describe('README examples', function(){
+    it('Hello, World.', function(){      
+      P = new Potato();
+      P.add('heading', '<h1><shadow></shadow></h1>');
+      var result = P.render('<heading>Hello, World.</heading>');
+      assert.equal(result, '<h1>Hello, World.</h1>');
     });
   });
   
