@@ -57,14 +57,15 @@ Potato.prototype.render = function(html) {
   var selectors = components
                     .map(function(x){ return x.name; })
                     .join();
-  $(selectors).each(function(){
-    var name = this.name;
-    var light = $(this).html();    
-    var component = self.list(name);
-    var output = component.replace(self.shadow,light);
-    $(this).replaceWith(output);
-  });
-  console.log($.html());
+  while($(selectors).length > 0){
+    $(selectors).each(function(){
+      var name = this.name;
+      var light = $(this).html();    
+      var component = self.list(name);
+      var output = component.replace(self.shadow,light);
+      $(this).replaceWith(output);
+    });
+  }
   return $.html();
 };
 
